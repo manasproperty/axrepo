@@ -1,5 +1,5 @@
 import { db } from './firebase';
-import { setDoc,onSnapshot, doc, collection,updateDoc, deleteDoc,getDoc,getDocs,writeBatch,serverTimestamp } from 'firebase/firestore';
+import { setDoc, onSnapshot, doc, collection, updateDoc, deleteDoc, getDoc, getDocs, writeBatch, serverTimestamp, addDoc } from 'firebase/firestore';
 
 class FirebaseUtil {
   static async uploadAnyModel(path, model) {
@@ -9,34 +9,58 @@ class FirebaseUtil {
         throw new Error('Invalid path');
       }
 
-      // Split the path into segments
-      const pathSegments = path.split('/');
-      let ref;
-
-      // Add a timestamp field to the model
-      const timestamp = new Date().toISOString(); // ISO timestamp for ordering
-      model.createdAt = serverTimestamp();
-
-      if (pathSegments.length % 2 === 0) {
-        // Even segments: Treat as a document path
-        const documentId = pathSegments.pop(); // Extract last segment as document ID
-        const parentPath = pathSegments.join('/'); // Get parent collection path
-        ref = doc(db, parentPath, documentId); // Create document reference
-        await setDoc(ref, model); // Use setDoc for specified document ID
-      } else {
-        // Odd segments: Treat as a collection path
-        ref = collection(db, path); // Create collection reference
-
-        // Use a custom document ID (e.g., timestamp or any other unique value)
-        const customDocId = `doc-${timestamp}`;
-        const docRef = doc(ref, customDocId); // Create a document reference with the custom ID
-        await setDoc(docRef, model); // Use setDoc instead of addDoc to specify the ID
-        return { state: 'success', data: customDocId };
+      console.log(`[FIREBASE] Attempting to upload to collection: ${path}`);
+      
+      // Simplify: Just use addDoc for automatic ID generation
+      // This avoids potential issues with custom IDs and path parsing
+      try {
+        // Create a clean copy of the model without undefined values
+        const cleanModel = {};
+        Object.keys(model).forEach(key => {
+          if (model[key] !== undefined && model[key] !== null) {
+            cleanModel[key] = model[key];
+          }
+        });
+        
+        // Use 'createdAt' to match the Android app's data model
+        cleanModel.createdAt = new Date(); // Firestore SDK handles Date objects correctly
+        
+        const collectionRef = collection(db, path);
+        const docRef = await addDoc(collectionRef, cleanModel);
+        
+        console.log(`[FIREBASE] Document written with ID: ${docRef.id}`);
+        return { state: 'success', id: docRef.id };
+      } catch (innerError) {
+        // Try alternative approach with setDoc if addDoc fails
+        console.error(`[FIREBASE] addDoc failed: ${innerError.message}. Trying setDoc...`);
+        
+        const timestamp = Date.now();
+        const docId = `doc_${timestamp}`;
+        const docRef = doc(db, path, docId);
+        
+        // Remove serverTimestamp which might cause issues
+        const simplifiedModel = { ...model, timestamp: timestamp };
+        delete simplifiedModel.createdAt;
+        
+        await setDoc(docRef, simplifiedModel);
+        return { state: 'success', id: docId };
       }
-
-      return { state: 'success', data: 'Document created successfully' };
     } catch (error) {
-      return { state: 'error', error: error.message };
+      console.error(`[FIREBASE] Upload error: ${error.code || 'unknown'} - ${error.message}`);
+      if (error.code === 'permission-denied') {
+        return { 
+          state: 'error', 
+          error: 'Permission denied. Check Firestore security rules.', 
+          details: error.message,
+          code: error.code 
+        };
+      }
+      return { 
+        state: 'error', 
+        error: error.message, 
+        code: error.code || 'unknown-error',
+        stack: error.stack
+      };
     }
   }
 
@@ -97,6 +121,42 @@ class FirebaseUtil {
       return { state: 'success', message: 'Document updated successfully' };
     } catch (error) {
       return { state: 'error', error: error.message };
+    }
+  }
+
+  static async testFirestoreAccess(collectionPath = 'axisbank') {
+    try {
+      console.log(`[FIREBASE] Testing read access to collection: ${collectionPath}`);
+      const collectionRef = collection(db, collectionPath);
+      
+      // Try to get documents from the collection
+      const querySnapshot = await getDocs(collectionRef);
+      
+      // Log success and document count
+      console.log(`[FIREBASE] Successfully read from collection. Found ${querySnapshot.size} documents.`);
+      
+      // Get the first few document IDs for verification
+      const docIds = [];
+      querySnapshot.forEach(doc => {
+        if (docIds.length < 5) { // Limit to 5 documents
+          docIds.push(doc.id);
+        }
+      });
+      
+      return { 
+        state: 'success', 
+        message: `Read access successful. Found ${querySnapshot.size} documents.`,
+        documentCount: querySnapshot.size,
+        sampleDocIds: docIds
+      };
+    } catch (error) {
+      console.error(`[FIREBASE] Read access test failed: ${error.code || 'unknown'} - ${error.message}`);
+      return { 
+        state: 'error', 
+        error: error.message,
+        code: error.code || 'unknown-error',
+        stack: error.stack
+      };
     }
   }
 
