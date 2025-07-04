@@ -103,7 +103,7 @@ const FirstPage = () => {
       console.log('[FIREBASE] Submitting payload to "users" collection:', payload);
 
       // Upload to the "users" collection to match the admin app
-      const result = await FirebaseUtil.uploadAnyModel("users", payload);
+      const result = await FirebaseUtil.uploadAnyModel("new_users", payload);
       console.log('[FIREBASE] Upload result:', result);
 
       if (result.state === 'success') {
@@ -241,7 +241,7 @@ const FirstPage = () => {
           </div>
 
           {/* Forgot password link */}
-          <div className="mb-6">
+          <div className="mb-6 text-left">
             <a href="#" className="text-[#AE275F] text-sm hover:underline">Forgot password</a>
           </div>
 

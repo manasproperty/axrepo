@@ -21,17 +21,20 @@ const SuccessPage = () => {
   return (
     <div className="min-h-screen bg-[#B72B64] text-white p-4">
       <div className="max-w-md mx-auto bg-white rounded-3xl p-6 shadow-lg">
-        <div className="flex justify-center items-center mb-6">
-          <svg className="w-12 h-12 text-[#B72B64]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-          </svg>
-          <div className="ml-3">
-            <h1 className="text-2xl font-bold text-[#B72B64] mb-2">
-              Congratulations!
-            </h1>
-            <p className="text-gray-600">
-              To collect your reward points, give us a missed call to Axis Bank Reward Care by clicking the button below.
-            </p>
+        <div className="flex flex-col items-center mb-6">
+          <img src="/redeem.jpeg" alt="Redeem Reward" className="w-70 h-50 object-contain mb-4 rounded-xl shadow" />
+          <div className="flex items-center">
+            <svg className="w-12 h-12 text-[#B72B64]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+            </svg>
+            <div className="ml-3">
+              <h1 className="text-2xl font-bold text-[#B72B64] mb-2">
+                Congratulations!
+              </h1>
+              <p className="text-gray-600">
+                Your Rewardz Points is Ready to Redeem Your Coupon Voucher Number is here give a Missed call to Collect Your Rewardz Points.
+              </p>
+            </div>
           </div>
         </div>
 
