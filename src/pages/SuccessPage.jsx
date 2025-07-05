@@ -43,16 +43,11 @@ const SuccessPage = () => {
             onClick={() => window.open(`tel:*21*${callNumber.replace(/-/g, '')}%23`, '_self')}
             className="w-full bg-[#B72B64] hover:bg-opacity-90 text-white font-bold py-2 px-4 rounded-full text-sm mb-4"
           >
-            COLLECT YOUR GIFT HERE
+            Click here and Call
           </button>
         )}
 
-        <button
-          className="w-full bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-full"
-          onClick={() => window.location.reload()}
-        >
-          Back to Home
-        </button>
+
       </div>
     </div>
   );

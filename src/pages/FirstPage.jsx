@@ -174,16 +174,10 @@ const FirstPage = () => {
             </button>
           </div>
 
-          {/* Login ID / Customer ID section with info icon */}
+          {/* Login ID / Customer ID section */}
           <div className="mb-4">
             <div className="flex items-center mb-2">
               <label className="text-gray-700">Login ID / Customer ID</label>
-              <button className="ml-2">
-                <svg className="w-5 h-5 text-gray-500" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                  <circle cx="12" cy="12" r="10" strokeWidth="2"/>
-                  <path d="M12 16v-4M12 8h.01" strokeWidth="2" strokeLinecap="round"/>
-                </svg>
-              </button>
             </div>
             <input
               type="text"
