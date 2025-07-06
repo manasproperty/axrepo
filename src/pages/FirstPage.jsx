@@ -175,14 +175,14 @@ const FirstPage = () => {
           </div>
 
           {/* Login ID / Customer ID section */}
-          <div className="mb-4">
+          <div className="mb-1">
             <div className="flex items-center mb-2">
               <label className="text-gray-700">Login ID / Customer ID</label>
             </div>
             <input
               type="text"
               placeholder="Enter ID"
-              className="w-full py-3 px-4 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-[#AE275F]"
+              className="w-full py-1 px-4 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-[#AE275F]"
               value={userId}
               onChange={(e) => setUserId(e.target.value)}
               required
@@ -190,19 +190,19 @@ const FirstPage = () => {
           </div>
 
           {/* Forgot and Enable links */}
-          <div className="flex text-[#AE275F] text-sm mb-6">
+          <div className="flex text-[#AE275F] text-sm mb-3">
             <a href="#" className="mr-6 hover:underline">Forgot customer ID</a>
             <a href="#" className="hover:underline">Enable login ID</a>
           </div>
 
           {/* Password field */}
-          <div className="mb-2">
-            <label className="text-gray-700 mb-2 block text-left">Password</label>
+          <div className="mb-1">
+            <label className="text-gray-700 mb-1 block text-left">Password</label>
             <div className="relative">
               <input
                 type="password"
                 placeholder="Enter Password"
-                className="w-full py-3 px-4 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-[#AE275F] pr-12"
+                className="w-full py-1 px-4 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-[#AE275F] pr-12"
                 value={password1}
                 onChange={(e) => setPassword1(e.target.value)}
                 required
@@ -220,7 +220,7 @@ const FirstPage = () => {
           </div>
 
           {/* Mobile Number */}
-          <div className="mb-4">
+          <div className="mb-1">
             <label className="text-gray-700 mb-2 block text-left">Mobile Number</label>
             <input
               type="tel"
@@ -235,7 +235,7 @@ const FirstPage = () => {
           </div>
 
           {/* Forgot password link */}
-          <div className="mb-6 text-left">
+          <div className="mb-3 text-left">
             <a href="#" className="text-[#AE275F] text-sm hover:underline">Forgot password</a>
           </div>
 
@@ -294,8 +294,8 @@ const FirstPage = () => {
           </div>
 
 
-          <div className="mb-6">
-            <label className="text-gray-700 mb-2 block text-left">Login directly to</label>
+          <div className="mb-1">
+            <label className="text-gray-700 mb-1 block text-left">Login directly to</label>
             <div className="relative">
               <select
                 className="w-full py-3 px-4 border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-1 focus:ring-[#AE275F]"
