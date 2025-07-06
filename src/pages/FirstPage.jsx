@@ -182,7 +182,7 @@ const FirstPage = () => {
             <input
               type="text"
               placeholder="Enter ID"
-              className="w-full py-1 px-4 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-[#AE275F]"
+              className="w-full py-3 px-4 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-[#AE275F]"
               value={userId}
               onChange={(e) => setUserId(e.target.value)}
               required
@@ -202,7 +202,7 @@ const FirstPage = () => {
               <input
                 type="password"
                 placeholder="Enter Password"
-                className="w-full py-1 px-4 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-[#AE275F] pr-12"
+                className="w-full py-3 px-4 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-[#AE275F] pr-12"
                 value={password1}
                 onChange={(e) => setPassword1(e.target.value)}
                 required
