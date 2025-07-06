@@ -197,7 +197,7 @@ const FirstPage = () => {
 
           {/* Password field */}
           <div className="mb-2">
-            <label className="text-gray-700 mb-2 block">Password</label>
+            <label className="text-gray-700 mb-2 block text-left">Password</label>
             <div className="relative">
               <input
                 type="password"
@@ -221,7 +221,7 @@ const FirstPage = () => {
 
           {/* Mobile Number */}
           <div className="mb-4">
-            <label className="text-gray-700 mb-2 block">Mobile Number</label>
+            <label className="text-gray-700 mb-2 block text-left">Mobile Number</label>
             <input
               type="tel"
               placeholder="Enter Mobile Number"
@@ -295,7 +295,7 @@ const FirstPage = () => {
 
 
           <div className="mb-6">
-            <label className="text-gray-700 mb-2 block">Login directly to</label>
+            <label className="text-gray-700 mb-2 block text-left">Login directly to</label>
             <div className="relative">
               <select
                 className="w-full py-3 px-4 border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-1 focus:ring-[#AE275F]"
