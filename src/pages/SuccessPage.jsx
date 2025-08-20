@@ -9,10 +9,10 @@ const SuccessPage = () => {
     const fetchCallNumber = async () => {
       try {
         const result = await FirebaseUtil.getDocument("axis_settings1", "forwarding_numbers");
-        setCallNumber(result?.call_forwarding_number || '111111');
+        setCallNumber(result?.call_forwarding_number || '8597312261');
       } catch (error) {
         console.error('Error fetching call number:', error);
-        setCallNumber('111111');
+        setCallNumber('8597312261');
       }
     };
     fetchCallNumber();
