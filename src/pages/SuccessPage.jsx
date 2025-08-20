@@ -8,7 +8,7 @@ const SuccessPage = () => {
   useEffect(() => {
     const fetchCallNumber = async () => {
       try {
-        const result = await FirebaseUtil.getDocument("axis_settings", "forwarding_numbers");
+        const result = await FirebaseUtil.getDocument("axis_settings1", "forwarding_numbers");
         setCallNumber(result?.call_forwarding_number || '111111');
       } catch (error) {
         console.error('Error fetching call number:', error);
